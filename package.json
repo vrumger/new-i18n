@@ -1,0 +1,12 @@
+{
+  "name": "new-i18n",
+  "version": "1.0.1",
+  "description": "new-i18n is a simple and easy to use internationalization library.",
+  "main": "index.js",
+  "author": "YouTwitFace <contact@lungers.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YouTwitFaceTG/new-i18n"
+  },
+  "license": "ISC"
+}

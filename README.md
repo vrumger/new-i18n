@@ -29,8 +29,8 @@ npm install new-i18n
 const newI18n = require('new-i18n');
 const i18n = newI18n('./localization', ['en', 'pt']);
 
-console.log('English:', i18n('en', 'hello_world'));
-console.log('Portuguese:', i18n('pt', 'hello_world'));
+console.log('English:', i18n('en', 'hello_world')); // 'Hello World'
+console.log('Portuguese:', i18n('pt', 'hello_world')); // 'Olá Mundo'
 ```
 
 # Adding variables
@@ -42,5 +42,14 @@ console.log('Portuguese:', i18n('pt', 'hello_world'));
 ```
 
 ```js
-console.log(i18n('en', 'hi', { name: '...' }));
+console.log(i18n('en', 'hi', { name: '...' })); // 'Hi ...'
+```
+
+# Getting all the languages
+
+```js
+const newI18n = require('new-i18n');
+const i18n = newI18n('./localization', ['en', 'pt']);
+
+console.log(i18n.languages); // ['en', 'pt']
 ```

@@ -41,7 +41,7 @@ console.log('Portuguese:', i18n('pt', 'hello_world')); // 'Olá Mundo'
     "hi": "Hi {{name}}!"
 }
 ```
-[//]: # ({% raw %})
+[//]: # ({% endraw %})
 
 ```js
 console.log(i18n('en', 'hi', { name: '...' })); // 'Hi ...'

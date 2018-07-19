@@ -35,13 +35,13 @@ console.log('Portuguese:', i18n('pt', 'hello_world')); // 'Olá Mundo'
 
 # Adding variables
 
-```json
 [//]: # ({% raw %})
+```json
 {
     "hi": "Hi {{name}}!"
 }
-[//]: # ({% raw %})
 ```
+[//]: # ({% raw %})
 
 ```js
 console.log(i18n('en', 'hi', { name: '...' })); // 'Hi ...'

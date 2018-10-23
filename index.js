@@ -6,11 +6,18 @@ module.exports = (folder, langs = []) => {
     langs.forEach(lang => (languages[lang] = require(`${folder}/${lang}.json`)));
 
     const i18n = function (lang, keyword, variables = {}) {
-        if (!languages[lang] || !languages[lang][keyword]) {
+        if (!languages[lang]) {
             return keyword;
         }
 
-        return languages[lang][keyword].replace(
+        const value = keyword
+            .split(`.`)
+            .reduce(
+                (res, key) => res[key],
+                languages[lang]
+            );
+
+        return !value ? keyword : value.replace(
             /\{{2}(.+?)\}{2}/g,
             (_, variable) => variables[variable] || variable
         );

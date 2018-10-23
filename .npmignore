@@ -1,0 +1,4 @@
+node_modules/
+test/
+_config.yml
+.gitignore

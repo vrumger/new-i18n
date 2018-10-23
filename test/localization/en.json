@@ -1,0 +1,12 @@
+{
+    "nested": {
+        "key": "value",
+        "with_variables": "{{variable}}",
+        "double_nested": {
+            "key": "value"
+        }
+    },
+    "not_nested": "value",
+    "with_variables": "{{variable}}",
+    "with_multiple_variables": "{{variable1}} {{variable2}}"
+}

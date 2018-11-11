@@ -10,9 +10,11 @@ describe(`new-i18n`, () => {
     it(`Should return the keyword if there's no value`, () => {
         const keyword = `non_existent_key`;
         const nested = `nested.${keyword}`;
+        const anotherNested = `${keyword}.${keyword}`;
 
         assert.equal(i18n(`en`, keyword), keyword);
         assert.equal(i18n(`en`, nested), nested);
+        assert.equal(i18n(`en`, anotherNested), anotherNested);
     });
 
     const variableValue = `value`;

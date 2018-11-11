@@ -13,7 +13,7 @@ module.exports = (folder, langs = []) => {
         const value = keyword
             .split(`.`)
             .reduce(
-                (res, key) => res[key],
+                (res, key) => res && res[key],
                 languages[lang]
             );
 

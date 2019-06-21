@@ -2,7 +2,7 @@
 
 const languages = {};
 
-module.exports = (folder, langs = []) => {
+module.exports = (folder, langs = [], fallback = null) => {
     langs.forEach(lang => (languages[lang] = require(`${folder}/${lang}.json`)));
 
     const i18n = function (lang, keyword, variables = {}) {
@@ -17,7 +17,15 @@ module.exports = (folder, langs = []) => {
                 languages[lang]
             );
 
-        return !value ? keyword : value.replace(
+        if (!value) {
+            if (fallback && lang !== fallback) {
+                return i18n(fallback, keyword, variables);
+            } else {
+                return keyword;
+            }
+        }
+
+        return  value.replace(
             /\{{2}(.+?)\}{2}/g,
             (_, variable) => variables[variable] || variable
         );

@@ -2,11 +2,14 @@
     "nested": {
         "key": "valor",
         "with_variables": "{{variable}}",
+        "fallback": "fallback",
         "double_nested": {
-            "key": "valor"
+            "key": "valor",
+            "fallback": "fallback"
         }
     },
     "not_nested": "valor",
     "with_variables": "{{variable}}",
-    "with_multiple_variables": "{{variable1}} {{variable2}}"
+    "with_multiple_variables": "{{variable1}} {{variable2}}",
+    "fallback": "fallback"
 }

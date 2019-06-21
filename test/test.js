@@ -17,6 +17,39 @@ describe(`new-i18n`, () => {
         assert.equal(i18n(`en`, anotherNested), anotherNested);
     });
 
+    it(`Should return the keyword if there's no value in the fallback`, () => {
+        const i18n = newI18n(`${__dirname}/localization`, languages, `pt`);
+        const keyword = `non_existent_key`;
+        const nested = `nested.${keyword}`;
+        const anotherNested = `${keyword}.${keyword}`;
+
+        assert.equal(i18n(`en`, keyword), keyword);
+        assert.equal(i18n(`en`, nested), nested);
+        assert.equal(i18n(`en`, anotherNested), anotherNested);
+    });
+
+    it(`Should fallback to the specified language`, () => {
+        const i18n = newI18n(`${__dirname}/localization`, languages, `pt`);
+        const keyword = `fallback`;
+        const nested = `nested.${keyword}`;
+        const doubleNested = `nested.double_nested.${keyword}`;
+
+        assert.equal(i18n(`en`, keyword), keyword);
+        assert.equal(i18n(`en`, nested), keyword);
+        assert.equal(i18n(`en`, doubleNested), keyword);
+    });
+
+    it(`Shouldn't recurse forever while falling back`, () => {
+        const i18n = newI18n(`${__dirname}/localization`, languages, `pt`);
+        const keyword = `non_existent_key`;
+        const nested = `nested.${keyword}`;
+        const anotherNested = `${keyword}.${keyword}`;
+
+        assert.equal(i18n(`en`, keyword), keyword);
+        assert.equal(i18n(`en`, nested), nested);
+        assert.equal(i18n(`en`, anotherNested), anotherNested);
+    });
+
     const variableValue = `value`;
 
     it(`Should work with variables`, () => {
@@ -40,10 +73,7 @@ describe(`new-i18n`, () => {
             unknown_variable: variableValue,
         };
 
-        assert.notEqual(
-            i18n(`en`, `with_variables`, variable),
-            variableValue
-        );
+        assert.notEqual(i18n(`en`, `with_variables`, variable), variableValue);
 
         assert.notEqual(
             i18n(`en`, `nested.with_variables`, variable),

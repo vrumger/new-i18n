@@ -1,8 +1,8 @@
 `use strict`;
 
-const languages = {};
-
 module.exports = (folder, langs = [], fallback = null) => {
+    const languages = {};
+
     langs.forEach(lang => (languages[lang] = require(`${folder}/${lang}.json`)));
 
     const i18n = function (lang, keyword, variables = {}) {

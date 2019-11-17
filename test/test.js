@@ -94,4 +94,12 @@ describe(`new-i18n`, () => {
     it(`Should have a .languages property`, () => {
         assert.deepEqual(i18n.languages, languages);
     });
+
+    it(`Should only show the languages for the current instance`, () => {
+        const i18n1 = newI18n(`${__dirname}/localization`, [`en`]);
+        assert.deepEqual(i18n1.languages, [`en`]);
+
+        const i18n2 = newI18n(`${__dirname}/localization`, [`pt`]);
+        assert.deepEqual(i18n2.languages, [`pt`]);
+    });
 });

@@ -7,6 +7,12 @@ const languages = [`en`, `pt`];
 const i18n = newI18n(`${__dirname}/localization`, languages);
 
 describe(`new-i18n`, () => {
+    it(`Should throw an error if there are no languages`, () => {
+        const error = `You need to add at least one language.`;
+        assert.throws(() => newI18n(``), Error, error);
+        assert.throws(() => newI18n(``, []), Error, error);
+    });
+
     it(`Should return the keyword if there's no value`, () => {
         const keyword = `non_existent_key`;
         const nested = `nested.${keyword}`;

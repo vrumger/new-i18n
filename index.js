@@ -1,6 +1,10 @@
 `use strict`;
 
-module.exports = (folder, langs = [], fallback = null) => {
+module.exports = (folder, langs, fallback = null) => {
+    if (!langs || (Array.isArray(langs) && langs.length === 0)) {
+        throw new Error(`You need to add at least one language.`);
+    }
+
     const languages = {};
 
     langs.forEach(lang => (languages[lang] = require(`${folder}/${lang}.json`)));

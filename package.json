@@ -6,7 +6,7 @@
   "author": "YouTwitFace <contact@lungers.com>",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint index.js test/test.js --fix"
+    "lint": "eslint index.js i18n.js test/test.js"
   },
   "repository": {
     "type": "git",

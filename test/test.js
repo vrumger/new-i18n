@@ -63,10 +63,7 @@ describe(`new-i18n`, () => {
             variable: variableValue,
         };
 
-        assert.equal(
-            i18n(`en`, `with_variables`, variable),
-            variableValue
-        );
+        assert.equal(i18n(`en`, `with_variables`, variable), variableValue);
 
         assert.equal(
             i18n(`en`, `nested.with_variables`, variable),

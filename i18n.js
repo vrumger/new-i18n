@@ -1,6 +1,9 @@
 class I18n extends Function {
     constructor(folder, languages, fallback = null) {
-        if (!languages || (Array.isArray(languages) && languages.length === 0)) {
+        if (
+            !languages ||
+            Array.isArray(languages) && languages.length === 0
+        ) {
             throw new Error(`You need to add at least one language.`);
         }
 

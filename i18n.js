@@ -55,6 +55,34 @@ class I18n extends Function {
             (_, variable) => variables[variable] || variable,
         );
     }
+
+    update(language, newValues) {
+        if (typeof language !== `string`) {
+            throw new Error(`Invalid language type: ${typeof language}`);
+        } else if (typeof newValues !== `object`) {
+            throw new Error(`Invalid values type: ${typeof newValues}`);
+        }
+
+        if (!this._languages[language]) {
+            this._languages[language] = {};
+        }
+
+        Object.keys(newValues).forEach(key => {
+            key.split(`.`).reduce((res, splitKey, index, array) => {
+                if (res === null) {
+                    return res;
+                } else if (index === array.length - 1) {
+                    res[splitKey] = newValues[key];
+                    return null;
+                } else if (typeof res[splitKey] === `object`) {
+                    return res[splitKey];
+                }
+
+                res[splitKey] = {};
+                return res[splitKey];
+            }, this._languages[language]);
+        });
+    }
 }
 
 module.exports = I18n;

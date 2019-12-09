@@ -67,7 +67,7 @@ describe(`new-i18n`, () => {
 
         assert.equal(
             i18n(`en`, `nested.with_variables`, variable),
-            variableValue
+            variableValue,
         );
     });
 
@@ -80,7 +80,7 @@ describe(`new-i18n`, () => {
 
         assert.notEqual(
             i18n(`en`, `nested.with_variables`, variable),
-            variableValue
+            variableValue,
         );
     });
 
@@ -90,8 +90,16 @@ describe(`new-i18n`, () => {
                 variable1: variableValue,
                 variable2: variableValue,
             }),
-            `${variableValue} ${variableValue}`
+            `${variableValue} ${variableValue}`,
         );
+    });
+
+    it(`Should allow updating languages`, () => {
+        const updatedKey = `nested.other.key`;
+        const updatedValue = `value`;
+
+        i18n.update(`en`, { [updatedKey]: updatedValue });
+        assert.equal(i18n(`en`, updatedKey), updatedValue);
     });
 
     it(`Should have a .languages property`, () => {

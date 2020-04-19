@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- If there's no value, it will return `null` instead of the keyword
+- If there's no return value, it will return `null` instead of the keyword
 - `.update` now accepts a deeply nested object (`{ some: { key: 'value' } }`) instead of an object with period delimited keys (`{ 'some.key': 'value' }`)
 
 [2.0.0]: https://github.com/YouTwitFace/new-i18n/tree/v2.0.0

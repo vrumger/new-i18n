@@ -10,7 +10,7 @@ npm install new-i18n
 
 # Example
 
-> There's a full working example [here](https://gist.github.com/YouTwitFace♠/618298c5ef179eebc511ca8c8a82eb76)
+> There's a full working example [here](https://gist.github.com/YouTwitFace/618298c5ef179eebc511ca8c8a82eb76)
 
 `localization/en.json`:
 
@@ -34,8 +34,8 @@ npm install new-i18n
 const newI18n = require('new-i18n');
 const i18n = newI18n('./localization', ['en', 'pt']);
 
-console.log('English:', i18n('en', 'hello_world')); // 'Hello World'
-console.log('Portuguese:', i18n('pt', 'hello_world')); // 'Olá Mundo'
+i18n('en', 'hello_world'); // 'Hello World'
+i18n('pt', 'hello_world'); // 'Olá Mundo'
 ```
 
 # Adding variables
@@ -51,7 +51,7 @@ console.log('Portuguese:', i18n('pt', 'hello_world')); // 'Olá Mundo'
 [//]: # '{% endraw %}'
 
 ```js
-console.log(i18n('en', 'hi', { name: '...' })); // 'Hi ...!'
+i18n('en', 'hi', { name: '...' }); // 'Hi ...!'
 ```
 
 # Updating Varaibles
@@ -60,7 +60,7 @@ console.log(i18n('en', 'hi', { name: '...' })); // 'Hi ...!'
 
 ```js
 i18n.update('en', { hi: 'Hello {{name}}!' });
-console.log(i18n('en', 'hi', { name: '...' })); // 'Hhello ...!'
+i18n('en', 'hi', { name: '...' }); // 'Hello ...!'
 ```
 
 [//]: # '{% endraw %}'
@@ -90,18 +90,12 @@ console.log(i18n('en', 'hi', { name: '...' })); // 'Hhello ...!'
 `index.js`:
 
 ```js
-const newI18n = require('new-i18n');
-const i18n = newI18n('./localization', ['en', 'pt']);
-
-console.log('English:', i18n('en', 'nested.hello_world')); // 'Hello World'
-console.log('Portuguese:', i18n('pt', 'nested.hello_world')); // 'Olá Mundo'
+i18n('en', 'nested.hello_world'); // 'Hello World'
+i18n('pt', 'nested.hello_world'); // 'Olá Mundo'
 ```
 
 # Getting all the languages
 
 ```js
-const newI18n = require('new-i18n');
-const i18n = newI18n('./localization', ['en', 'pt']);
-
-console.log(i18n.languages); // ['en', 'pt']
+i18n.languages; // ['en', 'pt']
 ```

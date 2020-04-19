@@ -13,25 +13,25 @@ describe(`new-i18n`, () => {
         assert.throws(() => newI18n(``, []), Error, error);
     });
 
-    it(`Should return the keyword if there's no value`, () => {
+    it(`Should return \`null\` if there's no value`, () => {
         const keyword = `non_existent_key`;
         const nested = `nested.${keyword}`;
         const anotherNested = `${keyword}.${keyword}`;
 
-        assert.equal(i18n(`en`, keyword), keyword);
-        assert.equal(i18n(`en`, nested), nested);
-        assert.equal(i18n(`en`, anotherNested), anotherNested);
+        assert.equal(i18n(`en`, keyword), null);
+        assert.equal(i18n(`en`, nested), null);
+        assert.equal(i18n(`en`, anotherNested), null);
     });
 
-    it(`Should return the keyword if there's no value in the fallback`, () => {
+    it(`Should return \`null\` if there's no value in the fallback`, () => {
         const i18n = newI18n(`${__dirname}/localization`, languages, `pt`);
         const keyword = `non_existent_key`;
         const nested = `nested.${keyword}`;
         const anotherNested = `${keyword}.${keyword}`;
 
-        assert.equal(i18n(`en`, keyword), keyword);
-        assert.equal(i18n(`en`, nested), nested);
-        assert.equal(i18n(`en`, anotherNested), anotherNested);
+        assert.equal(i18n(`en`, keyword), null);
+        assert.equal(i18n(`en`, nested), null);
+        assert.equal(i18n(`en`, anotherNested), null);
     });
 
     it(`Should fallback to the specified language`, () => {
@@ -51,9 +51,9 @@ describe(`new-i18n`, () => {
         const nested = `nested.${keyword}`;
         const anotherNested = `${keyword}.${keyword}`;
 
-        assert.equal(i18n(`en`, keyword), keyword);
-        assert.equal(i18n(`en`, nested), nested);
-        assert.equal(i18n(`en`, anotherNested), anotherNested);
+        assert.equal(i18n(`en`, keyword), null);
+        assert.equal(i18n(`en`, nested), null);
+        assert.equal(i18n(`en`, anotherNested), null);
     });
 
     const variableValue = `value`;

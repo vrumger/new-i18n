@@ -8,7 +8,7 @@ class I18n extends Function {
         }
 
         super();
-        this._fallback = fallback;
+        this.fallback = fallback;
         this._languages = languages.reduce((languages, language) => {
             languages[language] = require(`${folder}/${language}.json`);
             return languages;
@@ -25,17 +25,17 @@ class I18n extends Function {
         return Object.keys(this._languages);
     }
 
-    get fallback() {
-        return this._fallback;
-    }
+    _fallback(language, keyword, variables = {}) {
+        if (this.fallback && language !== this.fallback) {
+            return this.translate(this.fallback, keyword, variables);
+        }
 
-    set fallback(fallback) {
-        this._fallback = fallback;
+        return null;
     }
 
     translate(language, keyword, variables = {}) {
         if (!this._languages[language]) {
-            return keyword;
+            return this._fallback(language, keyword, variables);
         }
 
         const value = keyword
@@ -43,11 +43,7 @@ class I18n extends Function {
             .reduce((res, key) => res && res[key], this._languages[language]);
 
         if (!value) {
-            if (this._fallback && language !== this._fallback) {
-                return this.translate(this._fallback, keyword, variables);
-            }
-
-            return keyword;
+            return this._fallback(language, keyword, variables);
         }
 
         return value.replace(

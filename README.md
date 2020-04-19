@@ -2,6 +2,10 @@
 
 new-i18n is a simple and easy to use internationalization library.
 
+# Changelog
+
+See [CHANGELOG.md](https://github.com/YouTwitFace/new-i18n/blob/master/CHANGELOG.md)
+
 # Installation
 
 ```sh

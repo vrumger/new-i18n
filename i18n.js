@@ -1,3 +1,18 @@
+const _update = (oldValues, newValues) => {
+    return Object.keys(newValues).reduce(
+        (result, key) => {
+            if (typeof newValues[key] === `object`) {
+                result[key] = _update(result[key], newValues[key]);
+            } else {
+                result[key] = newValues[key];
+            }
+
+            return result;
+        },
+        { ...oldValues },
+    );
+};
+
 class I18n extends Function {
     constructor(folder, languages, fallback = null) {
         if (
@@ -9,10 +24,12 @@ class I18n extends Function {
 
         super();
         this.fallback = fallback;
-        this._languages = languages.reduce((languages, language) => {
-            languages[language] = require(`${folder}/${language}.json`);
-            return languages;
-        }, {});
+        this._languages = new Map(
+            languages.map(language => [
+                language,
+                require(`${folder}/${language}.json`),
+            ]),
+        );
 
         return new Proxy(this, {
             apply(target, _, [language, keyword, variables = {}]) {
@@ -22,7 +39,7 @@ class I18n extends Function {
     }
 
     get languages() {
-        return Object.keys(this._languages);
+        return [...this._languages.keys()];
     }
 
     _fallback(language, keyword, variables = {}) {
@@ -34,13 +51,16 @@ class I18n extends Function {
     }
 
     translate(language, keyword, variables = {}) {
-        if (!this._languages[language]) {
+        if (!this._languages.has(language)) {
             return this._fallback(language, keyword, variables);
         }
 
         const value = keyword
             .split(`.`)
-            .reduce((res, key) => res && res[key], this._languages[language]);
+            .reduce(
+                (res, key) => res && res[key],
+                this._languages.get(language),
+            );
 
         if (!value) {
             return this._fallback(language, keyword, variables);
@@ -59,25 +79,8 @@ class I18n extends Function {
             throw new Error(`Invalid values type: ${typeof newValues}`);
         }
 
-        if (!this._languages[language]) {
-            this._languages[language] = {};
-        }
-
-        Object.keys(newValues).forEach(key => {
-            key.split(`.`).reduce((res, splitKey, index, array) => {
-                if (res === null) {
-                    return res;
-                } else if (index === array.length - 1) {
-                    res[splitKey] = newValues[key];
-                    return null;
-                } else if (typeof res[splitKey] === `object`) {
-                    return res[splitKey];
-                }
-
-                res[splitKey] = {};
-                return res[splitKey];
-            }, this._languages[language]);
-        });
+        const oldValues = this._languages.get(language);
+        this._languages.set(language, _update(oldValues, newValues));
     }
 }
 

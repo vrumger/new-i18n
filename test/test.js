@@ -95,11 +95,8 @@ describe(`new-i18n`, () => {
     });
 
     it(`Should allow updating languages`, () => {
-        const updatedKey = `nested.other.key`;
-        const updatedValue = `value`;
-
-        i18n.update(`en`, { [updatedKey]: updatedValue });
-        assert.equal(i18n(`en`, updatedKey), updatedValue);
+        i18n.update(`en`, { nested: { other: { key: `value` } } });
+        assert.equal(i18n(`en`, `nested.other.key`), `value`);
     });
 
     it(`Should have a .languages property`, () => {

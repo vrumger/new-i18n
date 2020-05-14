@@ -1,6 +1,6 @@
 {
   "name": "new-i18n",
-  "version": "2.0.0",
+  "version": "3.0.0-0",
   "description": "new-i18n is a simple and easy to use internationalization library.",
   "main": "lib/index.js",
   "author": "YouTwitFace <contact@lungers.com>",

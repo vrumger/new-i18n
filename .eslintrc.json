@@ -5,8 +5,27 @@
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "tsconfig.json"
     },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "overrides": [
+        {
+            "files": "*.ts",
+            "extends": [
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": "off",
+                "@typescript-eslint/no-floating-promises": "error",
+                "@typescript-eslint/prefer-optional-chain": "error"
+            }
+        }
+    ],
     "rules": {
         "array-callback-return": "error",
         "arrow-parens": ["error", "as-needed"],
@@ -16,10 +35,12 @@
         "dot-notation": "error",
         "eol-last": ["error", "always"],
         "eqeqeq": ["error", "always"],
+        "for-direction": "error",
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "linebreak-style": ["error", "unix"],
         "no-async-promise-executor": "error",
         "no-await-in-loop": "error",
+        "no-console": "error",
         "no-dupe-else-if": "error",
         "no-else-return": "error",
         "no-extra-parens": ["error", "all"],

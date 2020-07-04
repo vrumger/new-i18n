@@ -50,6 +50,12 @@ class I18n extends Function {
         return null;
     }
 
+    /**
+     * @param {String} language 
+     * @param {String} keyword 
+     * @param {Object} variables 
+     * @returns {String} translation
+     */
     translate(language, keyword, variables = {}) {
         if (!this._languages.has(language)) {
             return this._fallback(language, keyword, variables);
@@ -72,6 +78,10 @@ class I18n extends Function {
         );
     }
 
+    /**
+     * @param {String} language 
+     * @param {Object} newValues 
+     */
     update(language, newValues) {
         if (typeof language !== `string`) {
             throw new Error(`Invalid language type: ${typeof language}`);

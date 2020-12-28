@@ -8,6 +8,8 @@ export default class I18n {
         // eslint-disable-next-line no-extra-parens
         if (!languages || (Array.isArray(languages) && languages.length === 0)) {
             throw new Error(`You need to add at least one language.`);
+        } else if (fallback && !languages.includes(fallback)) {
+            throw new Error(`The fallback language wasn't listed as a language.`);
         }
 
         this.fallback = fallback;

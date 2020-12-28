@@ -1,3 +1,14 @@
 {
-    "extends": "@istanbuljs/nyc-config-typescript"
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100,
+    "statements": 100,
+    "watermarks": {
+        "lines": [100, 100],
+        "functions": [100, 100],
+        "branches": [100, 100],
+        "statements": [100, 100]
+    }
 }

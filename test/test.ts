@@ -75,7 +75,7 @@ describe(`new-i18n`, () => {
 
     it(`Shouldn't replace unknown variables `, () => {
         const variable = {
-            unknown_variable: variableValue,
+            unknownVariable: variableValue,
         };
 
         assert.notEqual(i18n.translate(`en`, `with_variables`, variable), variableValue);

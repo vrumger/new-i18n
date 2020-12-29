@@ -14,6 +14,11 @@ describe(`new-i18n`, () => {
         assert.throws(() => new I18n(``, []), Error, error);
     });
 
+    it(`Should throw an error if the fallback wasn't listed as a language`, () => {
+        const error = `The fallback language wasn't listed as a language.`;
+        assert.throws(() => new I18n(``, [`en`], `pt`), Error, error);
+    });
+
     it(`Should work with nested keys`, () => {
         assert.equal(i18n.translate(`en`, `nested.key`), `value`);
         assert.equal(i18n.translate(`en`, `nested.double_nested.key`), `value`);
@@ -49,6 +54,12 @@ describe(`new-i18n`, () => {
         assert.equal(i18n.translate(`en`, keyword), keyword);
         assert.equal(i18n.translate(`en`, nested), keyword);
         assert.equal(i18n.translate(`en`, doubleNested), keyword);
+    });
+
+    it(`Should fallback if the language doesn't exist`, () => {
+        const i18n = new I18n(`${__dirname}/localization`, languages, `pt`);
+
+        assert.equal(i18n.translate(`non-existent`, `fallback`), `fallback`);
     });
 
     it(`Shouldn't recurse forever while falling back`, () => {
@@ -102,6 +113,20 @@ describe(`new-i18n`, () => {
         });
 
         assert.equal(i18n.translate(`en`, `nested.other.key`), `value`);
+    });
+
+    it(`Should validate argument types`, () => {
+        // @ts-expect-error
+        assert.throws(() => i18n.update(1), {
+            name: `Error`,
+            message: `Invalid language type: number`,
+        });
+
+        // @ts-expect-error
+        assert.throws(() => i18n.update(``, 1), {
+            name: `Error`,
+            message: `Invalid values type: number`,
+        });
     });
 
     it(`Should have a .languages property`, () => {

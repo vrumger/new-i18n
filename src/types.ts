@@ -2,9 +2,10 @@ export interface Language {
     [key: string]: string | Language;
 }
 
+export type Variable = string | number;
+
 export interface Variables {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
+    [key: string]: Variable;
 }
 
 export type Translation = string | null;

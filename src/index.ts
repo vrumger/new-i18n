@@ -49,7 +49,7 @@ export default class I18n {
             return this._fallback(language, keyword, variables);
         }
 
-        return value.replace(/\{{2}(.+?)\}{2}/g, (_, variable: string) => variables[variable] || variable);
+        return value.replace(/\{{2}(.+?)\}{2}/g, (_, variable: string) => (variables[variable] || variable).toString());
     }
 
     private _update(oldValues: Language, newValues: Language): Language {

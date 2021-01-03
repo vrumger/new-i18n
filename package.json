@@ -5,9 +5,9 @@
   "main": "lib/index.js",
   "author": "YouTwitFace <contact@lungers.com>",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.ts",
+    "test": "npm run prepare && mocha -r ts-node/register test/**/*.ts",
     "coverage": "nyc npm run test",
-    "lint": "eslint src/ test/",
+    "lint": "eslint .",
     "prepare": "rm -rf lib/ && tsc",
     "preversion": "npm run test"
   },

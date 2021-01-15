@@ -84,6 +84,15 @@ describe(`new-i18n`, () => {
         assert.equal(i18n.translate(`en`, `nested.with_variables`, variable), variableValue);
     });
 
+    it(`Should work with nullish variable`, () => {
+        const variable = {
+            variable: 0,
+        };
+
+        assert.equal(i18n.translate(`en`, `with_variables`, variable), `0`);
+        assert.equal(i18n.translate(`en`, `nested.with_variables`, variable), `0`);
+    });
+
     it(`Shouldn't replace unknown variables `, () => {
         const variable = {
             unknownVariable: variableValue,

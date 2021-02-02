@@ -14,6 +14,31 @@ describe(`new-i18n`, () => {
         assert.throws(() => new I18n(``, []), Error, error);
     });
 
+    it(`Should handle an object of languages`, () => {
+        const languages = {
+            en: {
+                key: `value`,
+            },
+            pt: {
+                key: `valor`,
+            },
+        };
+
+        const i18n = new I18n(languages, `en`);
+        assert.equal(i18n.translate(`en`, `key`), `value`);
+        assert.equal(i18n.translate(`pt`, `key`), `valor`);
+    });
+
+    it(`Should throw an error if the language is not an object`, () => {
+        const languages = {
+            en: `invalid`,
+        };
+
+        const error = `Invalid language map: ${typeof languages.en}`;
+        // @ts-expect-error
+        assert.throws(() => new I18n(languages), Error, error);
+    });
+
     it(`Should throw an error if the fallback wasn't listed as a language`, () => {
         const error = `The fallback language wasn't listed as a language.`;
         assert.throws(() => new I18n(``, [`en`], `pt`), Error, error);

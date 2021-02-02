@@ -1,19 +1,44 @@
-import { Language, Variables, Translation } from './types';
+import { Language, LanguageMap, Variables, Translation } from './types';
+
+const checkFallback = (languages: string[], fallback?: string) => {
+    if (fallback && !languages.includes(fallback)) {
+        throw new Error(`The fallback language wasn't listed as a language.`);
+    }
+};
 
 export default class I18n {
-    private _languages: Map<string, Language>;
+    private _languages!: Map<string, Language>;
     fallback?: string;
 
-    constructor(folder: string, languages: string[], fallback?: string) {
+    constructor(languages: LanguageMap, fallback?: string);
+    constructor(folder: string, languages: string[], fallback?: string);
+    constructor(folder: string | LanguageMap, languages?: string | string[], fallback?: string) {
         // eslint-disable-next-line no-extra-parens
         if (!languages || (Array.isArray(languages) && languages.length === 0)) {
             throw new Error(`You need to add at least one language.`);
-        } else if (fallback && !languages.includes(fallback)) {
-            throw new Error(`The fallback language wasn't listed as a language.`);
+        }
+
+        if (typeof folder === `object` && (languages === undefined || typeof languages === `string`)) {
+            const _fallback = languages;
+            const _languages = folder;
+
+            checkFallback(Object.keys(_languages), _fallback);
+
+            this._languages = new Map(
+                Object.entries(_languages).map(([name, language]) => {
+                    if (typeof language !== `object`) {
+                        throw new Error(`Invalid language map: ${typeof language}`);
+                    }
+
+                    return [name, language];
+                }),
+            );
+        } else if (typeof folder === `string` && Array.isArray(languages)) {
+            checkFallback(languages, fallback);
+            this._languages = new Map(languages.map(language => [language, require(`${folder}/${language}`)]));
         }
 
         this.fallback = fallback;
-        this._languages = new Map(languages.map(language => [language, require(`${folder}/${language}.json`)]));
     }
 
     get languages() {

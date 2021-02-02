@@ -4,7 +4,7 @@ new-i18n is a simple and easy to use internationalization library.
 
 # Changelog
 
-See [CHANGELOG.md](https://github.com/YouTwitFace/new-i18n/blob/master/CHANGELOG.md)
+See [CHANGELOG.md](https://github.com/AndrewLaneX/new-i18n/blob/master/CHANGELOG.md)
 
 # Installation
 
@@ -14,7 +14,7 @@ npm install new-i18n
 
 # Example
 
-> There's a full working example [here](https://gist.github.com/YouTwitFace/618298c5ef179eebc511ca8c8a82eb76)
+> There's a full working example [here](https://gist.github.com/AndrewLaneX/618298c5ef179eebc511ca8c8a82eb76)
 
 `localization/en.json`:
 

@@ -1,8 +1,10 @@
+.nyc_output/
 .github/
 node_modules/
 src/
 test/
-_config.yml
-.eslintrc.*
+.eslintrc.json
+.eslintignore
 .gitignore
+.nycrc.json
 CHANGELOG.md

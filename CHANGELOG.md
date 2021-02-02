@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-4] 2021-02-01
+
+### Added
+
+- You can now pass an object of `languageName: language` instead of a string of language names
+
+### Changed
+
+- You can now initialize `I18n` with zero languages
+
+## [3.0.0-3] 2021-01-15
+
+### Fixed
+
+- Nullish variables won't be ignored
+
 ## [3.0.0-2] 2021-01-03
 
 Re-release of [3.0.0-1](#300-1-2020-12-29) with build fixes.
@@ -33,3 +49,5 @@ Re-release of [3.0.0-1](#300-1-2020-12-29) with build fixes.
 [3.0.0-0]: https://github.com/AndrewLaneX/new-i18n/tree/v3.0.0-0
 [3.0.0-1]: https://github.com/AndrewLaneX/new-i18n/tree/v3.0.0-1
 [3.0.0-2]: https://github.com/AndrewLaneX/new-i18n/tree/v3.0.0-2
+[3.0.0-3]: https://github.com/AndrewLaneX/new-i18n/tree/v3.0.0-3
+[3.0.0-4]: https://github.com/AndrewLaneX/new-i18n/tree/v3.0.0-4

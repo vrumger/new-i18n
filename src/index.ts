@@ -13,11 +13,6 @@ export default class I18n {
     constructor(languages: LanguageMap, fallback?: string);
     constructor(folder: string, languages: string[], fallback?: string);
     constructor(folder: string | LanguageMap, languages?: string | string[], fallback?: string) {
-        // eslint-disable-next-line no-extra-parens
-        if (!languages || (Array.isArray(languages) && languages.length === 0)) {
-            throw new Error(`You need to add at least one language.`);
-        }
-
         if (typeof folder === `object` && (languages === undefined || typeof languages === `string`)) {
             const _fallback = languages;
             const _languages = folder;

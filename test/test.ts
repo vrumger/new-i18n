@@ -7,13 +7,6 @@ const languages = [`en`, `pt`];
 const i18n = new I18n(`${__dirname}/localization`, languages);
 
 describe(`new-i18n`, () => {
-    it(`Should throw an error if there are no languages`, () => {
-        const error = `You need to add at least one language.`;
-        // @ts-expect-error
-        assert.throws(() => new I18n(``), Error, error);
-        assert.throws(() => new I18n(``, []), Error, error);
-    });
-
     it(`Should handle an object of languages`, () => {
         const languages = {
             en: {

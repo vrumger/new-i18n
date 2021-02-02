@@ -1,3 +1,16 @@
+export interface FolderOptions {
+    folder: string;
+    languages: string[];
+    fallback?: string;
+}
+
+export interface LanguageMapOptions {
+    languages: LanguageMap;
+    fallback?: string;
+}
+
+export type Options = FolderOptions | LanguageMapOptions;
+
 export interface Language {
     [key: string]: string | Language;
 }

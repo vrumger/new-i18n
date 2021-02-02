@@ -4,7 +4,10 @@ import * as assert from 'assert';
 import I18n from '../src';
 
 const languages = [`en`, `pt`];
-const i18n = new I18n(`${__dirname}/localization`, languages);
+const i18n = new I18n({
+    folder: `${__dirname}/localization`,
+    languages,
+});
 
 describe(`new-i18n`, () => {
     it(`Should handle an object of languages`, () => {
@@ -17,7 +20,7 @@ describe(`new-i18n`, () => {
             },
         };
 
-        const i18n = new I18n(languages, `en`);
+        const i18n = new I18n({ languages, fallback: `en` });
         assert.equal(i18n.translate(`en`, `key`), `value`);
         assert.equal(i18n.translate(`pt`, `key`), `valor`);
     });
@@ -29,12 +32,12 @@ describe(`new-i18n`, () => {
 
         const error = `Invalid language map: ${typeof languages.en}`;
         // @ts-expect-error
-        assert.throws(() => new I18n(languages), Error, error);
+        assert.throws(() => new I18n({ languages }), Error, error);
     });
 
     it(`Should throw an error if the fallback wasn't listed as a language`, () => {
         const error = `The fallback language wasn't listed as a language.`;
-        assert.throws(() => new I18n(``, [`en`], `pt`), Error, error);
+        assert.throws(() => new I18n({ languages: { en: {} }, fallback: `pt` }), Error, error);
     });
 
     it(`Should work with nested keys`, () => {
@@ -53,7 +56,11 @@ describe(`new-i18n`, () => {
     });
 
     it(`Should return \`null\` if there's no value in the fallback`, () => {
-        const i18n = new I18n(`${__dirname}/localization`, languages, `pt`);
+        const i18n = new I18n({
+            folder: `${__dirname}/localization`,
+            languages,
+            fallback: `pt`,
+        });
         const keyword = `non_existent_key`;
         const nested = `nested.${keyword}`;
         const anotherNested = `${keyword}.${keyword}`;
@@ -64,7 +71,11 @@ describe(`new-i18n`, () => {
     });
 
     it(`Should fallback to the specified language`, () => {
-        const i18n = new I18n(`${__dirname}/localization`, languages, `pt`);
+        const i18n = new I18n({
+            folder: `${__dirname}/localization`,
+            languages,
+            fallback: `pt`,
+        });
         const keyword = `fallback`;
         const nested = `nested.${keyword}`;
         const doubleNested = `nested.double_nested.${keyword}`;
@@ -75,13 +86,21 @@ describe(`new-i18n`, () => {
     });
 
     it(`Should fallback if the language doesn't exist`, () => {
-        const i18n = new I18n(`${__dirname}/localization`, languages, `pt`);
+        const i18n = new I18n({
+            folder: `${__dirname}/localization`,
+            languages,
+            fallback: `pt`,
+        });
 
         assert.equal(i18n.translate(`non-existent`, `fallback`), `fallback`);
     });
 
     it(`Shouldn't recurse forever while falling back`, () => {
-        const i18n = new I18n(`${__dirname}/localization`, languages, `pt`);
+        const i18n = new I18n({
+            folder: `${__dirname}/localization`,
+            languages,
+            fallback: `pt`,
+        });
         const keyword = `non_existent_key`;
         const nested = `nested.${keyword}`;
         const anotherNested = `${keyword}.${keyword}`;
@@ -161,10 +180,16 @@ describe(`new-i18n`, () => {
     });
 
     it(`Should only show the languages for the current instance`, () => {
-        const i18n1 = new I18n(`${__dirname}/localization`, [`en`]);
+        const i18n1 = new I18n({
+            folder: `${__dirname}/localization`,
+            languages: [`en`],
+        });
         assert.deepEqual(i18n1.languages, [`en`]);
 
-        const i18n2 = new I18n(`${__dirname}/localization`, [`pt`]);
+        const i18n2 = new I18n({
+            folder: `${__dirname}/localization`,
+            languages: [`pt`],
+        });
         assert.deepEqual(i18n2.languages, [`pt`]);
     });
 });

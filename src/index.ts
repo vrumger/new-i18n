@@ -1,4 +1,4 @@
-import { Language, LanguageMap, Variables, Translation } from './types';
+import { Options, Language, Variables, Translation } from './types';
 
 const checkFallback = (languages: string[], fallback?: string) => {
     if (fallback && !languages.includes(fallback)) {
@@ -7,21 +7,23 @@ const checkFallback = (languages: string[], fallback?: string) => {
 };
 
 export default class I18n {
-    private _languages!: Map<string, Language>;
+    private _languages: Map<string, Language>;
     fallback?: string;
 
-    constructor(languages: LanguageMap, fallback?: string);
-    constructor(folder: string, languages: string[], fallback?: string);
-    constructor(folder: string | LanguageMap, languages?: string | string[], fallback?: string) {
-        if (typeof folder === `object` && (languages === undefined || typeof languages === `string`)) {
-            const _fallback = languages;
-            const _languages = folder;
+    constructor(options: Options) {
+        if (`folder` in options) {
+            checkFallback(options.languages, options.fallback);
 
-            checkFallback(Object.keys(_languages), _fallback);
-
-            this.fallback = _fallback;
+            this.fallback = options.fallback;
             this._languages = new Map(
-                Object.entries(_languages).map(([name, language]) => {
+                options.languages.map(language => [language, require(`${options.folder}/${language}`)]),
+            );
+        } else {
+            checkFallback(Object.keys(options.languages), options.fallback);
+
+            this.fallback = options.fallback;
+            this._languages = new Map(
+                Object.entries(options.languages).map(([name, language]) => {
                     if (typeof language !== `object`) {
                         throw new Error(`Invalid language map: ${typeof language}`);
                     }
@@ -29,10 +31,6 @@ export default class I18n {
                     return [name, language];
                 }),
             );
-        } else if (typeof folder === `string` && Array.isArray(languages)) {
-            checkFallback(languages, fallback);
-            this.fallback = fallback;
-            this._languages = new Map(languages.map(language => [language, require(`${folder}/${language}`)]));
         }
     }
 

@@ -19,6 +19,7 @@ export default class I18n {
 
             checkFallback(Object.keys(_languages), _fallback);
 
+            this.fallback = _fallback;
             this._languages = new Map(
                 Object.entries(_languages).map(([name, language]) => {
                     if (typeof language !== `object`) {
@@ -30,10 +31,9 @@ export default class I18n {
             );
         } else if (typeof folder === `string` && Array.isArray(languages)) {
             checkFallback(languages, fallback);
+            this.fallback = fallback;
             this._languages = new Map(languages.map(language => [language, require(`${folder}/${language}`)]));
         }
-
-        this.fallback = fallback;
     }
 
     get languages() {

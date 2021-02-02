@@ -46,9 +46,21 @@ export default class I18n {
         return null;
     }
 
-    translate(language: string, keyword: string, variables: Variables = {}): Translation {
+    translate(keyword: string, variables?: Variables): Translation;
+    translate(language: string, keyword: string, variables?: Variables): Translation;
+    translate(language: string, keyword?: string | Variables, variables?: Variables): Translation {
+        if (keyword === undefined || typeof keyword === `object` && keyword !== null) {
+            if (!this.fallback) {
+                throw new Error(`No language or fallback specified`);
+            }
+
+            return this.translate(this.fallback, language, keyword);
+        }
+
+        const _variables = variables ?? {};
+
         if (!this._languages.has(language)) {
-            return this._fallback(language, keyword, variables);
+            return this._fallback(language, keyword, _variables);
         }
 
         const lang = this._languages.get(language);
@@ -64,10 +76,12 @@ export default class I18n {
         }
 
         if (!value || typeof value !== `string`) {
-            return this._fallback(language, keyword, variables);
+            return this._fallback(language, keyword, _variables);
         }
 
-        return value.replace(/\{{2}(.+?)\}{2}/g, (_, variable: string) => (variables[variable] ?? variable).toString());
+        return value.replace(/\{{2}(.+?)\}{2}/g, (_, variable: string) =>
+            (_variables[variable] ?? variable).toString(),
+        );
     }
 
     private _update(oldValues: Language, newValues: Language): Language {

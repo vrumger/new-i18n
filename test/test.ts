@@ -149,6 +149,19 @@ describe(`new-i18n`, () => {
         );
     });
 
+    it(`Should use the fallback language if no language is specified`, () => {
+        const i18n = new I18n({
+            folder: `${__dirname}/localization`,
+            languages: [`en`],
+            fallback: `en`,
+        });
+        assert.equal(i18n.translate(`not_nested`), `value`);
+    });
+
+    it(`Should throw an error if no fallback and language are specified`, () => {
+        assert.throws(() => i18n.translate(`not_nested`), Error, `No language or fallback specified`);
+    });
+
     it(`Should allow updating languages`, () => {
         i18n.update(`en`, {
             nested: {

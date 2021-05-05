@@ -4,7 +4,7 @@ new-i18n is a simple and easy to use internationalization library.
 
 # Changelog
 
-See [CHANGELOG.md](https://github.com/AndrewLaneX/new-i18n/blob/master/CHANGELOG.md)
+See [CHANGELOG.md](https://github.com/AndrewLaneX/new-i18n/blob/typescript/CHANGELOG.md)
 
 # Installation
 
@@ -35,11 +35,22 @@ npm install new-i18n
 `index.js`:
 
 ```js
-const newI18n = require('new-i18n');
-const i18n = newI18n('./localization', ['en', 'pt']);
+const { default: newi18n } = require('new-i18n')
+const i18n = new newi18n(__dirname, ["en","pt"], "en");
 
-i18n('en', 'hello_world'); // 'Hello World'
-i18n('pt', 'hello_world'); // 'Olá Mundo'
+console.log('English:', i18n.translate('en', 'hello_world'));
+console.log('Portuguese:', i18n.translate('pt', 'hello_world'));
+
+console.log(i18n.translate('en', 'hi', { name: '...' }));
+console.log(i18n.translate('pt', 'hi', { name: '...' }));
+
+i18n.update('en', { hi: 'Hello my name is {{name}}!' });
+i18n.update('pt', { hi: 'Olá meu nome é {{name}}!' });
+
+console.log(i18n.translate('en', 'hi', { name: '...' }));
+console.log(i18n.translate('pt', 'hi', { name: '...' }));
+
+console.log(`newi18n languages: ${i18n.languages}`)
 ```
 
 # Adding variables
@@ -55,7 +66,7 @@ i18n('pt', 'hello_world'); // 'Olá Mundo'
 [//]: # '{% endraw %}'
 
 ```js
-i18n('en', 'hi', { name: '...' }); // 'Hi ...!'
+i18n.translate('en', 'hi', { name: '...' }); // 'Hi ...!'
 ```
 
 # Updating Varaibles
@@ -63,8 +74,8 @@ i18n('en', 'hi', { name: '...' }); // 'Hi ...!'
 [//]: # '{% raw %}'
 
 ```js
-i18n.update('en', { hi: 'Hello {{name}}!' });
-i18n('en', 'hi', { name: '...' }); // 'Hello ...!'
+i18n.update('en', { hi: 'Hello my name is {{name}}!' });
+i18n.translate('en', 'hi', { name: '...' }); // 'Hello ...!'
 ```
 
 [//]: # '{% endraw %}'
@@ -94,8 +105,8 @@ i18n('en', 'hi', { name: '...' }); // 'Hello ...!'
 `index.js`:
 
 ```js
-i18n('en', 'nested.hello_world'); // 'Hello World'
-i18n('pt', 'nested.hello_world'); // 'Olá Mundo'
+i18n.translate('en', 'nested.hello_world'); // 'Hello World'
+i18n.translate('pt', 'nested.hello_world'); // 'Olá Mundo'
 ```
 
 # Getting all the languages

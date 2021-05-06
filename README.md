@@ -35,8 +35,8 @@ npm install new-i18n
 `index.js`:
 
 ```js
-const { default: newi18n } = require('new-i18n')
-const i18n = new newi18n(__dirname, ["en","pt"], "en");
+const { default: I18n } = require('new-i18n');
+const i18n = new I18n(__dirname, ['en','pt'], 'en');
 
 console.log('English:', i18n.translate('en', 'hello_world'));
 console.log('Portuguese:', i18n.translate('pt', 'hello_world'));
@@ -50,7 +50,7 @@ i18n.update('pt', { hi: 'Olá meu nome é {{name}}!' });
 console.log(i18n.translate('en', 'hi', { name: '...' }));
 console.log(i18n.translate('pt', 'hi', { name: '...' }));
 
-console.log(`newi18n languages: ${i18n.languages}`)
+console.log(`I18n languages: ${i18n.languages}`)
 ```
 
 # Adding variables

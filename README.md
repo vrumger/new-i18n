@@ -75,7 +75,7 @@ i18n.translate('en', 'hi', { name: '...' }); // 'Hi ...!'
 
 ```js
 i18n.update('en', { hi: 'Hello my name is {{name}}!' });
-i18n.translate('en', 'hi', { name: '...' }); // 'Hello ...!'
+i18n.translate('en', 'hi', { name: '...' }); // 'Hello my name is ...!'
 ```
 
 [//]: # '{% endraw %}'

@@ -14,8 +14,6 @@ npm install new-i18n
 
 # Example
 
-> There's a full working example [here](https://gist.github.com/AndrewLaneX/618298c5ef179eebc511ca8c8a82eb76)
-
 `localization/en.json`:
 
 ```json

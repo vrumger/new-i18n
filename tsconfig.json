@@ -11,5 +11,13 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "forceConsistentCasingInFileNames": true
+    },
+    "typedocOptions": {
+        "excludePrivate": true,
+        "includeVersion": true,
+        "name": "new-i18n",
+        "out": "docs/build/",
+        "readme": "README.md",
+        "theme": "docs/theme/"
     }
 }

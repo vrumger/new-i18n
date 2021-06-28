@@ -6,7 +6,7 @@ const checkFallback = (languages: string[], fallback?: string) => {
     }
 };
 
-export default class I18n {
+export class I18n {
     private _languages: Map<string, Language>;
     fallback?: string;
 
@@ -111,3 +111,5 @@ export default class I18n {
         this._languages.set(language, this._update(oldValues || {}, newValues));
     }
 }
+
+export default I18n;

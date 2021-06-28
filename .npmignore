@@ -3,6 +3,7 @@
 node_modules/
 src/
 test/
+docs/
 .eslintrc.json
 .eslintignore
 .gitignore

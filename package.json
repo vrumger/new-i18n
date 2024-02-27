@@ -3,7 +3,7 @@
   "version": "3.0.0-5",
   "description": "new-i18n is a simple and easy to use internationalization library.",
   "main": "lib/index.js",
-  "author": "Andrew Lane <contact@lungers.com>",
+  "author": "Avrumy Lunger <avrumy@lungers.com>",
   "scripts": {
     "test": "npm run prepare && mocha -r ts-node/register test/**/*.ts",
     "coverage": "nyc npm run test",
